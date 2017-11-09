@@ -1,17 +1,33 @@
 body {
   background-color: white;
+  box-sizing: content-box;
 }
 
 #app {
   width: 400px;
-  background-color: grey;
+  background-color: lightGrey;
   padding: 25px;
 }
 
-li {
+h1, .search {
+  background: white;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li, .no-match {
   border: 1px solid black;
   background-color: white;
   margin: 5px;
-  padding-left: 5px;
+  padding: 5px;
   list-style-type: none;
+}
+
+.no-match {
+  background-color: #FE9E9E;
 }
