@@ -14,13 +14,13 @@ class App extends React.Component {
     this.state = {
       userMovies: props.sampleMovies,
       matches: props.sampleMovies,
-      searchText: '',
+      searchText: ''
     };
     this.showMatches = this.showMatches.bind(this);
     this.addMovie = this.addMovie.bind(this);
     this.changeSearchText = this.changeSearchText.bind(this);
   } 
- 
+
   changeSearchText(e) {
     this.setState({searchText: e.target.value});
   }
@@ -53,7 +53,9 @@ class App extends React.Component {
         showMatches={this.showMatches}
         changeSearchText={this.changeSearchText}  
       />
-      <MovieList movies={this.state.matches}/>
+      <MovieList 
+        movies={this.state.matches}
+      />
     </div>
     )
   }

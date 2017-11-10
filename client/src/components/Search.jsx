@@ -8,7 +8,6 @@ var Search = function(props) {
       </button>
       <input onChange={props.changeSearchText}/>
     </div>);
-
 }
 
 export default Search;

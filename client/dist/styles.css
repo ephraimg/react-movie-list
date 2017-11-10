@@ -24,10 +24,45 @@ li, .no-match {
   border: 1px solid black;
   background-color: white;
   margin: 5px;
+  margin-left: 0px;
   padding: 5px;
   list-style-type: none;
+  clear: both;
 }
 
 .no-match {
   background-color: #FE9E9E;
+}
+
+.list {
+  min-height: 300px;
+  border: 1px solid black;
+  background-color: white;
+  margin: 5px;
+  padding: 10px;
+  list-style-type: none;
+/*  position: relative;
+  top: 20px;*/
+}
+
+.tab {
+  border: 1px solid black;
+  background-color: white;
+  width: 75px;
+  padding: 5px;
+  margin: 0px 0px 5px 0px;
+  text-align: center;
+  float: left;
+/*  position: relative;
+  top: -20px;*/
+}
+
+
+.movie-title {
+  font-style: italic;
+}
+
+.watched-button {
+  float: right;
+  width: 75px;
 }

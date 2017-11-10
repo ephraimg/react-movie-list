@@ -13,7 +13,6 @@ class Add extends React.Component {
     this.setState({
       addText: e.target.value
     });
-    console.log(e.target.value);
   }
 
   render() {
