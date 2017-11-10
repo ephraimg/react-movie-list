@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import $ from 'jquery';
-// import Search from './components/Search.jsx';
 import MovieList from './components/MovieList.jsx';
 import Search from './components/Search.jsx';
+import Add from './components/Add.jsx';
 
 
 
@@ -12,34 +12,54 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: this.props.movies,
-      matches: this.props.movies
+      userMovies: props.sampleMovies,
+      matches: props.sampleMovies,
+      searchText: '',
     };
     this.showMatches = this.showMatches.bind(this);
+    this.addMovie = this.addMovie.bind(this);
+    this.changeSearchText = this.changeSearchText.bind(this);
   } 
  
-  showMatches(text) {
+  changeSearchText(e) {
+    this.setState({searchText: e.target.value});
+  }
+
+  showMatches() {
     var matches = [];
-    this.state.movies.forEach(movie => {
-      if (movie.title.toLowerCase().includes(text.toLowerCase())) {
+    this.state.userMovies.forEach(movie => {
+      if (movie.title.toLowerCase().includes(this.state.searchText.toLowerCase())) {
         matches.push(movie);
       }
     })
     this.setState({matches: matches});
+    console.log(JSON.stringify(this.state.userMovies));
+  }
+
+  addMovie(text) {
+    this.setState(
+      {userMovies: this.state.userMovies.concat({title: text})}, 
+      () => this.showMatches(this.state.searchText) 
+    );
   }
 
   render() {
     return (
     <div>
       <h1>Movie List</h1>
-      <Search movies={this.state.movies} showMatches={this.showMatches}/>
+      <Add addMovie={this.addMovie}/>
+      <Search 
+        movies={this.state.userMovies} 
+        showMatches={this.showMatches}
+        changeSearchText={this.changeSearchText}  
+      />
       <MovieList movies={this.state.matches}/>
     </div>
     )
   }
 }
 
-var movies = [
+var sampleMovies = [
   {title: 'Mean Girls'},
   {title: 'Hackers'},
   {title: 'The Grey'},
@@ -47,4 +67,4 @@ var movies = [
   {title: 'Ex Machina'},
 ];
 
-ReactDOM.render(<App movies={movies}/>, document.getElementById('app'));
+ReactDOM.render(<App sampleMovies={sampleMovies}/>, document.getElementById('app'));

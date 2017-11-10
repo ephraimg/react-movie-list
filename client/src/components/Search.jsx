@@ -1,28 +1,14 @@
 import React from 'react';
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchText: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
+var Search = function(props) {
 
-  handleChange(e) {
-    this.setState({
-      searchText: e.target.value
-    });
-    console.log(e.target.value);
-  }
-
-  render() {
     return (<div className="search">
-      <button onClick={()=>this.props.showMatches(this.state.searchText)}>Search movies:
+      <button onClick={props.showMatches}>
+        Search movies:
       </button>
-      <input onChange={this.handleChange}/>
+      <input onChange={props.changeSearchText}/>
     </div>);
-  }
+
 }
 
 export default Search;
