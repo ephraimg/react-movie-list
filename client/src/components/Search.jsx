@@ -1,6 +1,6 @@
 import React from 'react';
 
-var Search = function(props) {
+var Search = (props) => {
 
     return (<div className="search">
       <button onClick={props.showMatches}>

@@ -5,23 +5,41 @@ class MovieList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewingWatched: true
+      viewingWatched: false
     };
     this.toggleView = this.toggleView.bind(this);
+    this.renderMovieList = this.renderMovieList.bind(this);
   }
 
   toggleView() {
     this.setState({
       viewingWatched: !this.state.viewingWatched
-    }, ()=>console.log(this.state.viewingWatched))
+    });
   }
 
-  getStyleA(boolean) {
-    return { color: this.state.viewingWatched ? 'green' : 'grey'}
+  getStyleA() {
+    return { 
+      color: this.state.viewingWatched ? 'white' : 'black',
+      backgroundColor: this.state.viewingWatched ? 'green' : 'lightGrey'
+    }
   }
 
-  getStyleB(boolean) {
-    return { color: this.state.viewingWatched ? 'grey' : 'green'}
+  getStyleB() {
+    return { 
+      color: this.state.viewingWatched ? 'black' : 'white',
+      backgroundColor: this.state.viewingWatched ? 'lightGrey' : 'green'
+    }
+  }
+
+  renderMovieList() {
+    return this.props.movies.map((movie, index) => 
+      <Movie 
+        movie={movie} 
+        key={index}
+        viewingWatched={this.state.viewingWatched}
+        toggleWatched={this.props.toggleWatched}
+      />
+    )
   }
 
   render() {
@@ -33,17 +51,10 @@ class MovieList extends React.Component {
     } else {
       return (
         <div className="list">
-          <div className="tab" style={this.getStyleA()} onClick={this.toggleView}>To watch</div>
-          <div className="tab" style={this.getStyleB()} onClick={this.toggleView}>Watched</div>
+          <div className="tab" style={this.getStyleB()} onClick={this.toggleView}>To watch</div>
+          <div className="tab" style={this.getStyleA()} onClick={this.toggleView}>Watched</div>
           <ul>
-          {this.props.movies.map((movie, index) => 
-            <Movie 
-              movie={movie} 
-              key={index}
-              viewingWatched={this.state.viewingWatched}
-              toggleWatched={this.props.toggleWatched}
-            />
-          )}
+          {this.renderMovieList()}
         </ul>
       </div>)
     }

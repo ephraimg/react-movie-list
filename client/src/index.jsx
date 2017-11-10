@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import $ from 'jquery';
+import $ from 'jquery';
 import MovieList from './components/MovieList.jsx';
 import Search from './components/Search.jsx';
 import Add from './components/Add.jsx';
-
 
 
 class App extends React.Component {
@@ -12,14 +11,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userMovies: props.sampleMovies,
-      matches: props.sampleMovies,
+      userMovies: [],
+      matches: [],
       searchText: ''
     };
     this.showMatches = this.showMatches.bind(this);
     this.addMovie = this.addMovie.bind(this);
     this.changeSearchText = this.changeSearchText.bind(this);
   } 
+
+  componentDidMount() {
+    $.ajax({
+      url: '/api/movies',
+      type: 'GET',
+      success: results => {
+        this.setState({userMovies: results, matches: results});
+        console.log('Received results: ', results);
+      },
+      error: (xhr, err, other) => console.log('Ajax error: ', err)
+    })
+    // .done();
+  }
 
   changeSearchText(e) {
     this.setState({searchText: e.target.value});
@@ -61,12 +73,4 @@ class App extends React.Component {
   }
 }
 
-var sampleMovies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
-];
-
-ReactDOM.render(<App sampleMovies={sampleMovies}/>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
